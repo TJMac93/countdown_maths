@@ -139,29 +139,36 @@ def solve(goal, nums, verbose = True):
             solve(goal, nums_without_ij, verbose = False)
 
 def main():
-    big = [25,50,75,100]
-    small = [i for i in range(1,11)]
-    small += small
-    n_big = -1
-    while n_big <0 or n_big >4:
-        n_big =  int(input("How many big numbers? (MAX 4):\t"))
-    n_small = 6-n_big
-    goal = randint(1,1000)
 
-    ns = list(np.concatenate((np.random.choice(big, n_big, replace = False),np.random.choice(small, n_small, replace = False))))
-    print("-"*25)
-    print("Your numbers are:")
-    for n in ns:
-        print(n)
+    while True:
+        big = [25,50,75,100]
+        small = [i for i in range(1,11)]
+        small += small
+        n_big = -1
+        while n_big <0 or n_big >4:
+            n_big =  int(input("How many big numbers? (MAX 4):\t"))
+        n_small = 6-n_big
+        goal = randint(1,1000)
+
+        ns = list(np.concatenate((np.random.choice(big, n_big, replace = False),np.random.choice(small, n_small, replace = False))))
+        print("-"*25)
+        print("Your numbers are:")
+        for n in ns:
+            print(n)
+            sleep(0.3)
+
+        print("And your goal is:")
         sleep(0.3)
+        print(f"---{goal}---")
+        print(ns)
 
-    print("And your goal is:")
-    sleep(0.3)
-    print(f"---{goal}---")
-    print(ns)
+        sleep(3)
+        print()
+        solve(goal, ns)
 
-    sleep(3)
-    solve(goal, ns)
+        replay = input("Play again? (Y/N) ")
+        if replay in ("N","n"):
+            break
 
 if __name__ == '__main__':
     main()
